@@ -77,11 +77,11 @@ private $cookieExpire 	= 30;
 
 Simply include the class above the `<head>` of your `PHP` page with:
 ```php
-include_once('../path/to/class.TrafficTracker.php');
+<?php include_once('../path/to/class.TrafficTracker.php'); ?>
 ```
 Finally, initialize a new class call with:
 ```php
-$trafficTracker = new TrafficTracker($_COOKIE);
+<?php $trafficTracker = new TrafficTracker($_COOKIE); ?>
 ```
 
 #### Setup Google AdWords Destination URLs (if using AdWords)

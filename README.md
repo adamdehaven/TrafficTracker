@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `trafficTracker` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 ```
 
-Open the `TrafficTracker.php` file and edit the top section variables shown here:
+Open the `class.TrafficTracker.php` file and edit the top section variables shown here:
 ```
 // ---------------------------- SET DEFAULTS ---------------------------- //
 private $dbHost = 'localhost'; // Your Database Host.
@@ -75,7 +75,7 @@ private $cookieExpire = 30;
 
 Simply include the class above the `<head>` of your `PHP` page with:
 ```
-include_once('../path/to/TrafficTracker.php');
+include_once('../path/to/class.TrafficTracker.php');
 ```
 Finally, initialize a new class call with:
 ```
@@ -103,7 +103,7 @@ http://www.example.com/index.php?view=3&ttcpc=true&ttcpc_kw={keyword}&ttcpc_pos=
 The top of each page on your site (i.e. `http://www.example.com/index.php`) will look similar to this:
 ```
 <?php
-include_once('../path/to/TrafficTracker.php'); // include class
+include_once('../path/to/class.TrafficTracker.php'); // include class
 $trafficTracker = new TrafficTracker($_COOKIE); // initialize
 ?>
 ```

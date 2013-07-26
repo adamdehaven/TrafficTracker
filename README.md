@@ -60,17 +60,19 @@ CREATE TABLE IF NOT EXISTS `trafficTracker` (
 
 Open the `class.TrafficTracker.php` file and edit the top section variables shown here:
 ```
-// ---------------------------- SET DEFAULTS ---------------------------- //
-private $dbHost = 'localhost'; // Your Database Host.
-private $dbUsername = 'database-username'; // Your Database Username.
-private $dbPassword = 'database-password!'; //  Your Database Password.
-private $dbDatabase = 'database-name'; // Your Database Name.
-private $urlPrefix = 'http'; // Set URL prefix for your website.
-private $replaceInUrl = array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
-private $myIp = '10.0.0.1'; // Set to your IP address to filter out internal traffic.
+/* -------------------------------------------------------------------------
+------------------------------- SET DEFAULTS -------------------------------
+--------------------------------------------------------------------------*/
+private $dbHost   = 'localhost'; // Your Database Host.
+private $dbUsername 	= 'database-username'; // Your Database Username.
+private $dbPassword 	= 'database-password!'; //  Your Database Password.
+private $dbDatabase 	= 'database-name'; // Your Database Name.
+private $urlPrefix 	= 'http'; // Set URL prefix for your website.
+private $replaceInUrl 	= array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
+private $myIp 		= '10.0.0.1'; // Set to your IP address to filter out internal traffic.
 private $reportingTimezone = 'America/Kentucky/Louisville'; // http://www.php.net/manual/en/timezones.america.php
-private $dateFormat = 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
-private $cookieExpire = 30;
+private $dateFormat 	= 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
+private $cookieExpire 	= 30;
 ```
 
 Simply include the class above the `<head>` of your `PHP` page with:

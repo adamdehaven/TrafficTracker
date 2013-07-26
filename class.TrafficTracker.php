@@ -32,16 +32,16 @@ class TrafficTracker
   /* -------------------------------------------------------------------------
 	------------------------------- SET DEFAULTS -------------------------------
 	--------------------------------------------------------------------------*/
-	private $dbHost = 'localhost'; // Your Database Host.
-	private $dbUsername = 'database-username'; // Your Database Username.
-	private $dbPassword = 'database-password!'; //  Your Database Password.
-	private $dbDatabase = 'database-name'; // Your Database Name.
-	private $urlPrefix = 'http'; // Set URL prefix for your website.
-	private $replaceInUrl = array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
-	private $myIp = '10.0.0.1'; // Set to your IP address to filter out internal traffic.
+	private $dbHost 	= 'localhost'; // Your Database Host.
+	private $dbUsername 	= 'database-username'; // Your Database Username.
+	private $dbPassword 	= 'database-password!'; //  Your Database Password.
+	private $dbDatabase 	= 'database-name'; // Your Database Name.
+	private $urlPrefix 	= 'http'; // Set URL prefix for your website.
+	private $replaceInUrl 	= array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
+	private $myIp 		= '10.0.0.1'; // Set to your IP address to filter out internal traffic.
 	private $reportingTimezone = 'America/Kentucky/Louisville'; // http://www.php.net/manual/en/timezones.america.php
-	private $dateFormat = 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
-	private $cookieExpire = 30;
+	private $dateFormat 	= 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
+	private $cookieExpire 	= 30;
 	/* =========================================================================
 	============================= DO NOT EDIT BELOW ============================
 	==========================================================================*/
@@ -75,10 +75,10 @@ class TrafficTracker
 	} //-- end setAdwordsCookies()
 	
 	private function processDefaults() {
-		$dirtyUrl = $this->urlPrefix.'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; // Get URL of the current page.
-		$this->theCurrentUrl = str_replace($replaceInUrl, '', $dirtyUrl); // delete unwanted strings from URL.
-		$this->visitTimestamp = date($this->dateFormat); // Set Current Date & Time
-		$this->userIp = $_SERVER['REMOTE_ADDR']; // Set Visitor's IP Address
+		$dirtyUrl 		= $this->urlPrefix.'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; // Get URL of the current page.
+		$this->theCurrentUrl 	= str_replace($replaceInUrl, '', $dirtyUrl); // delete unwanted strings from URL.
+		$this->visitTimestamp 	= date($this->dateFormat); // Set Current Date & Time
+		$this->userIp 		= $_SERVER['REMOTE_ADDR']; // Set Visitor's IP Address
 	} //--end processDefaults()
 	
 	private function parseCookies() {
@@ -86,28 +86,28 @@ class TrafficTracker
 		list($domainHash,$sourceTimestamp, $sessionNumber, $campaignNumber, $campaignData) = explode('.', $_COOKIE["__utmz"],5);
 		$sourceData = parse_str(strtr($campaignData, '|', '&')); // Parse the __utmz data
 		
-		$this->referrerMedium				=	$utmcmd;	// medium (organic, referral, direct, etc)
-		$this->referrerSource				=	$utmcsr;	// source (google, facebook.com, etc)
-		$this->referrerContent		=	$utmcct;	// content (index.html, etc)
-		$this->referrerCampaign			=	$utmccn;	// campaign 
-		$this->referrerKeyword			= $utmctr;	// term (search term)
-		$this->referrerPageViewed		= $this->theCurrentUrl;
+		$this->referrerMedium		= $utmcmd;	// medium (organic, referral, direct, etc)
+		$this->referrerSource		= $utmcsr;	// source (google, facebook.com, etc)
+		$this->referrerContent		= $utmcct;	// content (index.html, etc)
+		$this->referrerCampaign		= $utmccn; // campaign 
+		$this->referrerKeyword		= $utmctr;	// term (search term)
+		$this->referrerPageViewed	= $this->theCurrentUrl;
 		if(isset($utmgclid)): // if from AdWords
-			$this->referrerSource			=	'google';
-			$this->referrerCampaign		=	'';
-			$this->referrerMedium			=	'cpc';
-			$this->referrerContent		=	'';
-			$this->referrerAdwordsKeyword		= $utmctr;
+			$this->referrerSource		= 'google';
+			$this->referrerCampaign		= '';
+			$this->referrerMedium		= 'cpc';
+			$this->referrerContent		= '';
+			$this->referrerAdwordsKeyword	= $utmctr;
 		endif;
 		
 		// Parse the __utma Cookie
 		list($domainHash,$uniqueId,$timestampFirstVisit,$timestampPreviousVisit,$timestampStartCurrentVisit,$numSessionsStarted) = explode('.', $_COOKIE["__utma"]);
 		
-		$this->identifyUser					= $uniqueId; // Get Google Analytics unique user ID.
-		$this->firstVisit						=	date($this->dateFormat,$timestampFirstVisit); // Get timestamp of first visit.
-		$this->previousVisit				=	date($this->dateFormat,$timestampPreviousVisit); // Get timestamp of previous visit.
-		$this->currentVisitStarted	=	date($this->dateFormat,$timestampStartCurrentVisit); // Get timestamp of current visit.
-		$this->timesVisited					=	$numSessionsStarted; // Get number of times visited.
+		$this->identifyUser		= $uniqueId; // Get Google Analytics unique user ID.
+		$this->firstVisit		= date($this->dateFormat,$timestampFirstVisit); // Get timestamp of first visit.
+		$this->previousVisit		= date($this->dateFormat,$timestampPreviousVisit); // Get timestamp of previous visit.
+		$this->currentVisitStarted	= date($this->dateFormat,$timestampStartCurrentVisit); // Get timestamp of current visit.
+		$this->timesVisited		= $numSessionsStarted; // Get number of times visited.
 		
 		// Parse the __utmb Cookie
 		list($domainHash,$pageViews,$garbage,$timestampStartCurrentVisit) = explode('.', $_COOKIE['__utmb']);
@@ -116,9 +116,9 @@ class TrafficTracker
 	
 	// If user came from AdWords
 	private function setIfAdWords() {
-		$this->referrerAdwordsKeyword = (isset($_COOKIE['ttcpc_kw']) ? $_COOKIE['ttcpc_kw'] : $utmctr); // Set adwordsKeyword
-		$this->referrerAdwordsMatchType = (isset($_COOKIE['ttcpc_mt']) ? $_COOKIE['ttcpc_mt'] : ''); // Set adwordsMatchType
-		$this->referrerAdwordsPosition = (isset($_COOKIE['ttcpc_pos']) ? $_COOKIE['ttcpc_pos'] : ''); // Set adwordsPosition
+		$this->referrerAdwordsKeyword	= (isset($_COOKIE['ttcpc_kw']) ? $_COOKIE['ttcpc_kw'] : $utmctr); // Set adwordsKeyword
+		$this->referrerAdwordsMatchType	= (isset($_COOKIE['ttcpc_mt']) ? $_COOKIE['ttcpc_mt'] : ''); // Set adwordsMatchType
+		$this->referrerAdwordsPosition	= (isset($_COOKIE['ttcpc_pos']) ? $_COOKIE['ttcpc_pos'] : ''); // Set adwordsPosition
 	} //-- end setIfAdWords()
 	
 	private function logTraffic() { // Write to Database

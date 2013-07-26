@@ -98,7 +98,6 @@ http://www.example.com/index.php?view=3&ttcpc=true&ttcpc_kw={keyword}&ttcpc_pos=
 The top of each page on your site (i.e. `http://www.example.com/index.php`) will look similar to this:
 ```
 <?php
-session_start(); // Start PHP Session
 include_once('../path/to/TrafficTracker.php'); // include class
 $trafficTracker = new TrafficTracker($_COOKIE); // initialize
 ?>

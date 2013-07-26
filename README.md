@@ -26,6 +26,11 @@ Key|Description|Value
 `userIp`|The IP address of the visitor|**_example:_** `10.0.0.1`
 `timestamp`|The timestamp of the logged visit.|date with format: `0000-00-00 00:00:00`
 
+## REQUIREMENTS
+* Web Server / Hosting Account running PHP 5+.
+* Website pages capable of running `PHP` server-side code (usually ending in `.php`) as well as JavaScript.
+* [Google Analytics](https://www.google.com/intl/en_ALL/analytics/index.html) tracking code initialized on all website pages utilizing the asynchronous snippet.
+* If using Google AdWords, you must append each keyword's Destination URL with the [custom URL parameters](#setup-google-adwords-destination-urls-if-using-adwords) outlined below.
 
 ## SETUP
 Create a new table on your database called `trafficTracker` using the SQL statement below:
@@ -102,8 +107,3 @@ include_once('../path/to/TrafficTracker.php'); // include class
 $trafficTracker = new TrafficTracker($_COOKIE); // initialize
 ?>
 ```
-
-## REQUIREMENTS
-* Web Server / Hosting Account running PHP 5+.
-* Website pages capable of running `PHP` server-side code (usually ending in `.php`) as well as JavaScript.
-* [Google Analytics](https://www.google.com/intl/en_ALL/analytics/index.html) tracking code initialized on all website pages utilizing the asynchronous snippet.

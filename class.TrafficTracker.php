@@ -29,7 +29,9 @@
 
 class TrafficTracker
 {
-  // ---------------------------- SET DEFAULTS ---------------------------- //
+  /* =========================================================================
+	=============================== SET DEFAULTS ===============================
+	==========================================================================*/
 	private $dbHost = 'localhost'; // Your Database Host.
 	private $dbUsername = 'database-username'; // Your Database Username.
 	private $dbPassword = 'database-password!'; //  Your Database Password.
@@ -40,9 +42,9 @@ class TrafficTracker
 	private $reportingTimezone = 'America/Kentucky/Louisville'; // http://www.php.net/manual/en/timezones.america.php
 	private $dateFormat = 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
 	private $cookieExpire = 30;
-	/*-------------------------------------------------------------------------------
-	-----^^^^^^^^^^^^^^^^^^^^^----- DO NOT EDIT BELOW ----^^^^^^^^^^^^^^^^^^^^^^-----
-	-------------------------------------------------------------------------------*/
+	/* =========================================================================
+	============================= DO NOT EDIT BELOW ============================
+	==========================================================================*/
 	private	$referrerMedium;
 	private	$referrerSource;
 	private	$referrerContent;

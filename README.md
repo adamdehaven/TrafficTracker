@@ -1,4 +1,4 @@
-TrafficTracker
+TrafficTracker v1.0
 ==============
 This is a simple PHP class to track and log all of a website's traffic using `PHP` and `MySQL`. The class utilizes cookies set by the typical Google Analytics tracking code initialization. In addition, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.
 

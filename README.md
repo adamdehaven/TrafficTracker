@@ -34,7 +34,7 @@ Key|Description|Value
 
 ## SETUP
 Create a new table on your database called `trafficTracker` using the SQL statement below:
-```
+```php
 CREATE TABLE IF NOT EXISTS `trafficTracker` (
   `id` int(10) NOT NULL auto_increment,
   `identifyUser` varchar(65) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `trafficTracker` (
 ```
 
 Open the `class.TrafficTracker.php` file and edit the top section variables shown here:
-```
+```php
 /* -------------------------------------------------------------------------
 ------------------------------- SET DEFAULTS -------------------------------
 --------------------------------------------------------------------------*/
@@ -76,11 +76,11 @@ private $cookieExpire 	= 30;
 ```
 
 Simply include the class above the `<head>` of your `PHP` page with:
-```
+```php
 include_once('../path/to/class.TrafficTracker.php');
 ```
 Finally, initialize a new class call with:
-```
+```php
 $trafficTracker = new TrafficTracker($_COOKIE);
 ```
 
@@ -103,7 +103,7 @@ http://www.example.com/index.php?view=3&ttcpc=true&ttcpc_kw={keyword}&ttcpc_pos=
 ## USAGE EXAMPLE
 
 The top of each page on your site (i.e. `http://www.example.com/index.php`) will look similar to this:
-```
+```php
 <?php
 include_once('../path/to/class.TrafficTracker.php'); // include class
 $trafficTracker = new TrafficTracker($_COOKIE); // initialize

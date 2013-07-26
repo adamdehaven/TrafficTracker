@@ -1,6 +1,6 @@
 TrafficTracker
 ==============
-This is a simple PHP class to track and log all of a website's traffic using `PHP` and `MySQL`. The class utilizes cookies set by the typical Google Analytics tracking code initialization. Also, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.
+This is a simple PHP class to track and log all of a website's traffic using `PHP` and `MySQL`. The class utilizes cookies set by the typical Google Analytics tracking code initialization. In addition, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.
 
 ## HOW IT WORKS
 The class writes to a MySQL database table, saving values for every page visit for the following attributes:
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `trafficTracker` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 ```
 
-Open the `Traffic-Tracker.php` file and edit the top section variables shown here:
+Open the `TrafficTracker.php` file and edit the top section variables shown here:
 ```
 // ---------------------------- SET DEFAULTS ---------------------------- //
 private $dbHost = 'localhost'; // Your Database Host.
@@ -70,7 +70,7 @@ private $cookieExpire = 30;
 
 Simply include the class above the `<head>` of your `PHP` page with:
 ```
-include_once('../path/to/Traffic-Tracker.php');
+include_once('../path/to/TrafficTracker.php');
 ```
 Finally, initialize a new class call with:
 ```

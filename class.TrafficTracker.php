@@ -158,12 +158,12 @@ class TrafficTracker
 		$cookieDie = time() + ($this->cookieExpire * 24 * 60 * 60); // Cookie is good for X Number of days; 24 hours; 60 mins; 60secs
 		$this->setAdwordsCookies(); // Set cookies for AdWords
 		// If we have the cookies - parse them
-		if(isset($_COOKIE['__utma']) && isset($_COOKIE['__utmz'])) {
+		if(isset($_COOKIE['__utma']) && isset($_COOKIE['__utmz'])):
 			$this->processDefaults();
 			$this->parseCookies();
 			$this->setIfAdWords();
 			$this->logTraffic();
-		}
+		endif;
 	} //-- end __construct($_COOKIE)
 	
 } //-- end class TrafficTracker

@@ -1,6 +1,6 @@
 <?php
 /* ==========================================================
- * class.TrafficTracker.php v1.5
+ * class.TrafficTracker.php v1.6
  * https://github.com/adamdehaven/TrafficTracker
  * 
  * Author: Adam Dehaven ( @adamdehaven )
@@ -156,13 +156,13 @@ class TrafficTracker
 		$mysqli->close();
 	} //-- end logTraffic()
 	
-	function __construct($dbHost,$dbUsername,$dbPassword,$dbDatabase,$trackPrefix='ttcpc',$deleteRollingDays='30') {
+	function __construct($dbHost,$dbUsername,$dbPassword,$dbDatabase,$trackPrefix='ttcpc',$deleteRollingDays=30) {
 		$this->dbHost = $dbHost;
 		$this->dbUsername = $dbUsername;
 		$this->dbPassword = $dbPassword;
 		$this->dbDatabase = $dbDatabase;
 		$this->trackPrefix = $trackPrefix;
-		$this->deleteRollingDays = $deleteRollingDays;
+		$this->deleteRollingDays = "$deleteRollingDays";
 		date_default_timezone_set($this->reportingTimezone); // Set timezone.
 		$cookieDie = time() + ($this->cookieExpire * 24 * 60 * 60); // Cookie is good for X Number of days; 24 hours; 60 mins; 60secs
 		$this->setAdwordsCookies(); // Set cookies for AdWords

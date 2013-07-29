@@ -34,7 +34,7 @@ class TrafficTracker
 	--------------------------------------------------------------------------*/
 	private $dbHost 	= 'localhost'; // Your Database Host.
 	private $dbUsername 	= 'database-username'; // Your Database Username.
-	private $dbPassword 	= 'database-password!'; //  Your Database Password.
+	private $dbPassword 	= 'database-password'; //  Your Database Password.
 	private $dbDatabase 	= 'database-name'; // Your Database Name.
 	private $urlPrefix 	= 'http'; // Set URL prefix for your website.
 	private $replaceInUrl 	= array('?customer=new','?version=mobile'); // strip out any custom strings from URL.

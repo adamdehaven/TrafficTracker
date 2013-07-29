@@ -38,6 +38,7 @@ class TrafficTracker
 	private $reportingTimezone = 'America/Kentucky/Louisville'; // http://www.php.net/manual/en/timezones.america.php
 	private $dateFormat 	= 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
 	private $cookieExpire 	= 30;
+	private $deleteRollingDays = 30;
 	/* =========================================================================
 	============================= DO NOT EDIT BELOW ============================
 	==========================================================================*/
@@ -151,6 +152,7 @@ class TrafficTracker
 				)"
 			);
 		endif;
+		$mysqli->query("DELETE FROM trafficTracker WHERE timestamp < DATE_SUB(NOW(), INTERVAL ".$this->deleteRollingDays." DAY)"); // Delete rolling $deleteRollingDays value days
 		$mysqli->close();
 	} //-- end logTraffic()
 	

@@ -1,6 +1,6 @@
 <?php
 /* ==========================================================
- * class.TrafficTracker.php v1.4
+ * class.TrafficTracker.php v1.5
  * https://github.com/adamdehaven/TrafficTracker
  * 
  * Author: Adam Dehaven ( @adamdehaven )
@@ -37,8 +37,7 @@ class TrafficTracker
 	private $myIp 		= array('10.0.0.1'); // Put IP addresses you would like to filter out (not track) in array.
 	private $reportingTimezone = 'America/Kentucky/Louisville'; // http://www.php.net/manual/en/timezones.america.php
 	private $dateFormat 	= 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
-	private $cookieExpire 	= 30;
-	private $deleteRollingDays = 30;
+	private $cookieExpire 	= 30; // Set number of days for AdWords tracking cookies to be valid.
 	/* =========================================================================
 	============================= DO NOT EDIT BELOW ============================
 	==========================================================================*/
@@ -47,6 +46,7 @@ class TrafficTracker
 	private $dbPassword;
 	private $dbDatabase;
 	private $trackPrefix;
+	private $deleteRollingDays;
 	private	$referrerMedium;
 	private	$referrerSource;
 	private	$referrerContent;
@@ -152,16 +152,17 @@ class TrafficTracker
 				)"
 			);
 		endif;
-		$mysqli->query("DELETE FROM trafficTracker WHERE timestamp < DATE_SUB(NOW(), INTERVAL ".$this->deleteRollingDays." DAY)"); // Delete rolling $deleteRollingDays value days
+		$mysqli->query("DELETE FROM trafficTracker WHERE timestamp < DATE_SUB(NOW(), INTERVAL ".$this->deleteRollingDays." DAY)"); 
 		$mysqli->close();
 	} //-- end logTraffic()
 	
-	function __construct($dbHost,$dbUsername,$dbPassword,$dbDatabase,$trackPrefix = 'ttcpc') {
-		$this->trackPrefix = $trackPrefix;
+	function __construct($dbHost,$dbUsername,$dbPassword,$dbDatabase,$trackPrefix='ttcpc',$deleteRollingDays='30') {
 		$this->dbHost 	= $dbHost;
 		$this->dbUsername 	= $dbUsername;
 		$this->dbPassword 	= $dbPassword;
 		$this->dbDatabase 	= $dbDatabase;
+		$this->trackPrefix = $trackPrefix;
+		$this->deleteRollingDays = $deleteRollingDays;
 		date_default_timezone_set($this->reportingTimezone); // Set timezone.
 		$cookieDie = time() + ($this->cookieExpire * 24 * 60 * 60); // Cookie is good for X Number of days; 24 hours; 60 mins; 60secs
 		$this->setAdwordsCookies(); // Set cookies for AdWords

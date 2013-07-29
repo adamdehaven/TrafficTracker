@@ -1,6 +1,6 @@
 <?php
 /* ==========================================================
- * class.TrafficTracker.php v1.2
+ * class.TrafficTracker.php v1.3
  * https://github.com/adamdehaven/TrafficTracker
  * 
  * Author: Adam Dehaven ( @adamdehaven )
@@ -38,7 +38,7 @@ class TrafficTracker
 	private $dbDatabase 	= 'database-name'; // Your Database Name.
 	private $urlPrefix 	= 'http'; // Set URL prefix for your website.
 	private $replaceInUrl 	= array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
-	private $myIp 		= '10.0.0.1'; // Set to your IP address to filter out internal traffic.
+	private $myIp 		= array('10.0.0.1'); // Put IP addresses you would like to filter out (not track) in array.
 	private $reportingTimezone = 'America/Kentucky/Louisville'; // http://www.php.net/manual/en/timezones.america.php
 	private $dateFormat 	= 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
 	private $cookieExpire 	= 30;
@@ -128,7 +128,7 @@ class TrafficTracker
 		if ($mysqli->connect_error):
 			die('Connect Error (' . $mysqli->connect_errno . ') '.$mysqli->connect_error);
 		endif;
-		if(isset($this->referrerPageViewed) && $this->userIp != $this->myIp): // If referrerPageViewed is set & not an internal IP
+		if(isset($this->referrerPageViewed) && !in_array($this->userIp,$this->myIp)): // If referrerPageViewed is set & not an internal IP
 			$mysqli->query("INSERT INTO trafficTracker (identifyUser, medium, source, content, campaign, keyword, pageViewed, adwordsKeyword, adwordsMatchType, adwordsPosition, firstVisit, previousVisit, currentVisit, timesVisited, pagesViewed, userIp, timestamp) VALUES 
 				(
 				'".$this->identifyUser."',

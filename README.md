@@ -79,7 +79,7 @@ Next, initialize the class with arguments:
 ```php
 <?php $trafficTracker = new TrafficTracker($dbHost, $dbUsername, $dbPassword, $dbDatabase, $trackPrefix, $deleteRollingDays); ?>
 ```
-The first 4 arguments define the connection to your database. The 4th argument `$trackPrefix` will be used as the prefix for your Google  AdWords destination URL custom parameters, as well as for the cookies set in the visitor's browser. The default value (if unset) is `ttcpc`. The 5th argument `$deleteRollingDays` is a **string** value that designates the number of rolling days to go back before deleting logged visits. The default value for `$deleteRollingDays` is `'30'`, meaning that any record greater than 30 days ago will be deleted.
+The first 4 arguments define the connection to your database. The 4th argument `$trackPrefix` will be used as the prefix for your Google  AdWords destination URL custom parameters, as well as for the cookies set in the visitor's browser. The default value (if unset) is `ttcpc`. The 5th argument `$deleteRollingDays` is an **integer** value that designates the number of rolling days to go back before deleting logged visits. The default value for `$deleteRollingDays` is 30, meaning that any record created greater than 30 days ago from *now* will be deleted.
 
 #### Setup Google AdWords Destination URLs (if using AdWords)
 If using Google AdWords campaigns to drive traffic to your website, add the following parameters to the end of **each** destination URL, changing `ttcpc` in the code below to the value of `$trackPrefix` if you defined a different string.
@@ -106,6 +106,6 @@ The top of each page on your site will look similar to this:
 ```php
 <?php
 include_once('../path/to/class.TrafficTracker.php'); // Include class
-$trafficTracker = new TrafficTracker('your_host', 'your_db_username', 'your_db_password', 'your_database', 'ttcpc', '60');
+$trafficTracker = new TrafficTracker('your_host', 'your_db_username', 'your_db_password', 'your_database', 'ttcpc', 60);
 ?>
 ```

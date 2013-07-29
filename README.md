@@ -81,11 +81,12 @@ Simply include the class above the `<head>` of your `PHP` page with:
 ```
 Finally, initialize a new class call with:
 ```php
-<?php $trafficTracker = new TrafficTracker($_COOKIE); ?>
+<?php $trafficTracker = new TrafficTracker($trackPrefix, $_COOKIE); ?>
 ```
+The `$trackPrefix` variable sets the prefix for the Google AdWords destination URL custom parameters, which is also used when setting cookies in the visitor's browser. The default prefix (if unset) is `ttcpc`.
 
 #### Setup Google AdWords Destination URLs (if using AdWords)
-If using Google AdWords campaigns to drive traffic to your website, add the following parameters to the end of **each** destination URL
+If using Google AdWords campaigns to drive traffic to your website, add the following parameters to the end of **each** destination URL, changing `ttcpc` in the code below to the value of `$trackPrefix`.
 ```
 ?ttcpc=true&ttcpc_kw={keyword}&ttcpc_pos={adposition}&ttcpc_mt={matchtype}
 ```
@@ -106,6 +107,6 @@ The top of each page on your site (i.e. `http://www.example.com/index.php`) will
 ```php
 <?php
 include_once('../path/to/class.TrafficTracker.php'); // include class
-$trafficTracker = new TrafficTracker($_COOKIE); // initialize
+$trafficTracker = new TrafficTracker('ttcpc,$_COOKIE); // initialize
 ?>
 ```

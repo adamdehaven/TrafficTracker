@@ -1,4 +1,4 @@
-TrafficTracker v1.1
+TrafficTracker v1.2
 ==============
 This is a simple PHP class created and maintained by [@adamdehaven](http://about.adamdehaven.com/) to track and log all of a website's traffic using `PHP` and `MySQL`. The class utilizes cookies set by the typical Google Analytics tracking code initialization. In addition, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.
 
@@ -63,30 +63,30 @@ Open the `class.TrafficTracker.php` file and edit the top section variables show
 /* -------------------------------------------------------------------------
 ------------------------------- SET DEFAULTS -------------------------------
 --------------------------------------------------------------------------*/
-private $dbHost   = 'localhost'; // Your Database Host.
-private $dbUsername 	= 'database-username'; // Your Database Username.
-private $dbPassword 	= 'database-password!'; //  Your Database Password.
-private $dbDatabase 	= 'database-name'; // Your Database Name.
-private $urlPrefix 	= 'http'; // Set URL prefix for your website.
-private $replaceInUrl 	= array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
-private $myIp 		= '10.0.0.1'; // Set to your IP address to filter out internal traffic.
-private $reportingTimezone = 'America/Kentucky/Louisville'; // http://www.php.net/manual/en/timezones.america.php
-private $dateFormat 	= 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
-private $cookieExpire 	= 30;
+private $dbHost             = 'localhost'; // Your Database Host.
+private $dbUsername         = 'database-username'; // Your Database Username.
+private $dbPassword         = 'database-password!'; //  Your Database Password.
+private $dbDatabase         = 'database-name'; // Your Database Name.
+private $urlPrefix          = 'http'; // Set URL prefix for your website.
+private $replaceInUrl       = array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
+private $myIp               = '10.0.0.1'; // Set to your IP address to filter out internal traffic.
+private $reportingTimezone  = 'America/Kentucky/Louisville'; // http://www.php.net/manual/en/timezones.america.php
+private $dateFormat         = 'Y-m-d H:i:s'; // Preferred date format - http://php.net/manual/en/function.date.php
+private $cookieExpire       = 30;
 ```
 
 Simply include the class above the `<head>` of your `PHP` page with:
 ```php
 <?php include_once('../path/to/class.TrafficTracker.php'); ?>
 ```
-Finally, initialize a new class call with:
+Finally, set the value for `$trackPrefix` (default is `ttcpc`) when initializing a new class call. The string set for `$trackPrefix` will be used as the prefix for your AdWords destination URL custom parameters, as well as for the cookies set in the visitor's browser:
 ```php
-<?php $trafficTracker = new TrafficTracker($trackPrefix, $_COOKIE); ?>
+<?php $trafficTracker = new TrafficTracker($trackPrefix); ?>
 ```
 The `$trackPrefix` variable sets the prefix for the Google AdWords destination URL custom parameters, which is also used when setting cookies in the visitor's browser. The default prefix (if unset) is `ttcpc`.
 
 #### Setup Google AdWords Destination URLs (if using AdWords)
-If using Google AdWords campaigns to drive traffic to your website, add the following parameters to the end of **each** destination URL, changing `ttcpc` in the code below to the value of `$trackPrefix`.
+If using Google AdWords campaigns to drive traffic to your website, add the following parameters to the end of **each** destination URL, changing `ttcpc` in the code below to the value of `$trackPrefix` if you defined a different string.
 ```
 ?ttcpc=true&ttcpc_kw={keyword}&ttcpc_pos={adposition}&ttcpc_mt={matchtype}
 ```
@@ -103,14 +103,10 @@ http://www.example.com/index.php?view=3&ttcpc=true&ttcpc_kw={keyword}&ttcpc_pos=
 
 ## USAGE EXAMPLE
 
-The top of each page on your site (i.e. `http://www.example.com/index.php`) will look similar to this:
+The top of each page on your site will look similar to this:
 ```php
 <?php
-include_once('../path/to/class.TrafficTracker.php'); // include class
-<<<<<<< HEAD
-$trafficTracker = new TrafficTracker('ttcpc,$_COOKIE); // initialize
-=======
-$trafficTracker = new TrafficTracker('ttcpc',$_COOKIE); // initialize
->>>>>>> e93444f4799ea1f10e859f63ac18c1d2613091f9
+include_once('../path/to/class.TrafficTracker.php'); // Include class
+$trafficTracker = new TrafficTracker('ttcpc'); // Initialize the class, changing 'ttcpc' to your desired prefix.
 ?>
 ```

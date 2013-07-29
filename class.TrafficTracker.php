@@ -1,6 +1,6 @@
 <?php
 /* ==========================================================
- * class.TrafficTracker.php v1.0
+ * class.TrafficTracker.php v1.1
  * https://github.com/adamdehaven/TrafficTracker
  * 
  * Author: Adam Dehaven ( @adamdehaven )
@@ -45,6 +45,7 @@ class TrafficTracker
 	/* =========================================================================
 	============================= DO NOT EDIT BELOW ============================
 	==========================================================================*/
+	private $trackPrefix;
 	private	$referrerMedium;
 	private	$referrerSource;
 	private	$referrerContent;
@@ -65,12 +66,12 @@ class TrafficTracker
 	private $visitTimestamp;
 	
 	private function setAdwordsCookies() {
-		if(isset($_GET['ttcpc']) && $_GET['ttcpc'] == 'true'):
+		if(isset($_GET[$this->trackPrefix]) && $_GET[$this->trackPrefix] == 'true'):
 			// Set cookie indicating referrer is Google AdWords Click good for 30 days
-			setcookie('ttcpc_referrer', 'googleAdwords', $cookieDie,'/');
-			setcookie('ttcpc_kw', $_GET['ttcpc_kw'], $cookieDie,'/');
-			setcookie('ttcpc_pos', $_GET['ttcpc_pos'], $cookieDie,'/');
-			setcookie('ttcpc_mt', $_GET['ttcpc_mt'], $cookieDie,'/');
+			setcookie($this->trackPrefix.'_referrer', 'googleAdwords', $cookieDie,'/');
+			setcookie($this->trackPrefix.'_kw', $_GET[$this->trackPrefix.'_kw'], $cookieDie,'/');
+			setcookie($this->trackPrefix.'_pos', $_GET[$this->trackPrefix.'_pos'], $cookieDie,'/');
+			setcookie($this->trackPrefix.'_mt', $_GET[$this->trackPrefix.'_mt'], $cookieDie,'/');
 		endif;
 	} //-- end setAdwordsCookies()
 	
@@ -116,9 +117,9 @@ class TrafficTracker
 	
 	// If user came from AdWords
 	private function setIfAdWords() {
-		$this->referrerAdwordsKeyword	= (isset($_COOKIE['ttcpc_kw']) ? $_COOKIE['ttcpc_kw'] : $utmctr); // Set adwordsKeyword
-		$this->referrerAdwordsMatchType	= (isset($_COOKIE['ttcpc_mt']) ? $_COOKIE['ttcpc_mt'] : ''); // Set adwordsMatchType
-		$this->referrerAdwordsPosition	= (isset($_COOKIE['ttcpc_pos']) ? $_COOKIE['ttcpc_pos'] : ''); // Set adwordsPosition
+		$this->referrerAdwordsKeyword	= (isset($_COOKIE[$this->trackPrefix.'_kw']) ? $_COOKIE[$this->trackPrefix.'_kw'] : $utmctr); // Set adwordsKeyword
+		$this->referrerAdwordsMatchType	= (isset($_COOKIE[$this->trackPrefix.'_mt']) ? $_COOKIE[$this->trackPrefix.'_mt'] : ''); // Set adwordsMatchType
+		$this->referrerAdwordsPosition	= (isset($_COOKIE[$this->trackPrefix.'_pos']) ? $_COOKIE[$this->trackPrefix.'_pos'] : ''); // Set adwordsPosition
 	} //-- end setIfAdWords()
 	
 	private function logTraffic() { // Write to Database
@@ -153,7 +154,8 @@ class TrafficTracker
 		$mysqli->close();
 	} //-- end logTraffic()
 	
-	function __construct($_COOKIE) {
+	function __construct($trackPrefix = 'ttcpc',$_COOKIE) {
+		$this->trackPrefix = $trackPrefix;
 		date_default_timezone_set($this->reportingTimezone); // Set timezone.
 		$cookieDie = time() + ($this->cookieExpire * 24 * 60 * 60); // Cookie is good for X Number of days; 24 hours; 60 mins; 60secs
 		$this->setAdwordsCookies(); // Set cookies for AdWords

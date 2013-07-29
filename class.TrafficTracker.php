@@ -1,6 +1,6 @@
 <?php
 /* ==========================================================
- * class.TrafficTracker.php v1.3
+ * class.TrafficTracker.php v1.4
  * https://github.com/adamdehaven/TrafficTracker
  * 
  * Author: Adam Dehaven ( @adamdehaven )
@@ -32,10 +32,6 @@ class TrafficTracker
   /* -------------------------------------------------------------------------
 	------------------------------- SET DEFAULTS -------------------------------
 	--------------------------------------------------------------------------*/
-	private $dbHost 	= 'localhost'; // Your Database Host.
-	private $dbUsername 	= 'database-username'; // Your Database Username.
-	private $dbPassword 	= 'database-password'; //  Your Database Password.
-	private $dbDatabase 	= 'database-name'; // Your Database Name.
 	private $urlPrefix 	= 'http'; // Set URL prefix for your website.
 	private $replaceInUrl 	= array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
 	private $myIp 		= array('10.0.0.1'); // Put IP addresses you would like to filter out (not track) in array.
@@ -45,6 +41,10 @@ class TrafficTracker
 	/* =========================================================================
 	============================= DO NOT EDIT BELOW ============================
 	==========================================================================*/
+	private $dbHost;
+	private $dbUsername;
+	private $dbPassword;
+	private $dbDatabase;
 	private $trackPrefix;
 	private	$referrerMedium;
 	private	$referrerSource;
@@ -154,8 +154,12 @@ class TrafficTracker
 		$mysqli->close();
 	} //-- end logTraffic()
 	
-	function __construct($trackPrefix = 'ttcpc',$_COOKIE) {
+	function __construct($dbHost,$dbUsername,$dbPassword,$dbDatabase,$trackPrefix = 'ttcpc') {
 		$this->trackPrefix = $trackPrefix;
+		$this->dbHost 	= $dbHost;
+		$this->dbUsername 	= $dbUsername;
+		$this->dbPassword 	= $dbPassword;
+		$this->dbDatabase 	= $dbDatabase;
 		date_default_timezone_set($this->reportingTimezone); // Set timezone.
 		$cookieDie = time() + ($this->cookieExpire * 24 * 60 * 60); // Cookie is good for X Number of days; 24 hours; 60 mins; 60secs
 		$this->setAdwordsCookies(); // Set cookies for AdWords

@@ -103,6 +103,6 @@ The top of each page on your site will look similar to this:
 ```php
 <?php
 include_once('../path/to/class.TrafficTracker.php'); // Include class
-$trafficTracker = new TrafficTracker('host', 'username', 'password', 'ttcpc'); // Initialize the class, changing 'ttcpc' to your desired prefix.
+$trafficTracker = new TrafficTracker('host', 'username', 'password', 'database', 'ttcpc'); // Initialize the class, changing 'ttcpc' to your desired prefix.
 ?>
 ```

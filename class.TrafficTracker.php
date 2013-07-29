@@ -157,10 +157,10 @@ class TrafficTracker
 	} //-- end logTraffic()
 	
 	function __construct($dbHost,$dbUsername,$dbPassword,$dbDatabase,$trackPrefix='ttcpc',$deleteRollingDays='30') {
-		$this->dbHost 	= $dbHost;
-		$this->dbUsername 	= $dbUsername;
-		$this->dbPassword 	= $dbPassword;
-		$this->dbDatabase 	= $dbDatabase;
+		$this->dbHost = $dbHost;
+		$this->dbUsername = $dbUsername;
+		$this->dbPassword = $dbPassword;
+		$this->dbDatabase = $dbDatabase;
 		$this->trackPrefix = $trackPrefix;
 		$this->deleteRollingDays = $deleteRollingDays;
 		date_default_timezone_set($this->reportingTimezone); // Set timezone.

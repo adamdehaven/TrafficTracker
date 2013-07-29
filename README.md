@@ -1,4 +1,4 @@
-TrafficTracker v1.3
+TrafficTracker v1.4
 ==============
 A simple PHP class created and maintained by [@adamdehaven](http://about.adamdehaven.com/) to track and log all of a website's traffic using `PHP` and `MySQL`. The class utilizes cookies set by the typical Google Analytics tracking code initialization. In addition, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.
 
@@ -63,10 +63,6 @@ Open the `class.TrafficTracker.php` file and edit the top section variables show
 /* -------------------------------------------------------------------------
 ------------------------------- SET DEFAULTS -------------------------------
 --------------------------------------------------------------------------*/
-private $dbHost             = 'localhost'; // Your Database Host.
-private $dbUsername         = 'database-username'; // Your Database Username.
-private $dbPassword         = 'database-password'; //  Your Database Password.
-private $dbDatabase         = 'database-name'; // Your Database Name.
 private $urlPrefix          = 'http'; // Set URL prefix for your website.
 private $replaceInUrl       = array('?customer=new','?version=mobile'); // strip out any custom strings from URL.
 private $myIp               = array('10.0.0.1'); // Put IP addresses you would like to filter out (not track) in array.
@@ -79,11 +75,11 @@ Simply include the class above the `<head>` of your `PHP` page with:
 ```php
 <?php include_once('../path/to/class.TrafficTracker.php'); ?>
 ```
-Finally, set the value for `$trackPrefix` (default is `ttcpc`) when initializing a new class call. The string set for `$trackPrefix` will be used as the prefix for your AdWords destination URL custom parameters, as well as for the cookies set in the visitor's browser:
+Next, initialize the class with arguments:
 ```php
-<?php $trafficTracker = new TrafficTracker($trackPrefix); ?>
+<?php $trafficTracker = new TrafficTracker($dbHost, $dbUsername, $dbPassword, $dbDatabase, $trackPrefix); ?>
 ```
-The `$trackPrefix` variable sets the prefix for the Google AdWords destination URL custom parameters, which is also used when setting cookies in the visitor's browser. The default prefix (if unset) is `ttcpc`.
+The first 4 arguments define the connection to your database. The 4th argument `$trackPrefix` will be used as the prefix for your Google  AdWords destination URL custom parameters, as well as for the cookies set in the visitor's browser. The default value (if unset) is `ttcpc`.
 
 #### Setup Google AdWords Destination URLs (if using AdWords)
 If using Google AdWords campaigns to drive traffic to your website, add the following parameters to the end of **each** destination URL, changing `ttcpc` in the code below to the value of `$trackPrefix` if you defined a different string.
@@ -107,6 +103,6 @@ The top of each page on your site will look similar to this:
 ```php
 <?php
 include_once('../path/to/class.TrafficTracker.php'); // Include class
-$trafficTracker = new TrafficTracker('ttcpc'); // Initialize the class, changing 'ttcpc' to your desired prefix.
+$trafficTracker = new TrafficTracker('host', 'username', 'password', 'ttcpc'); // Initialize the class, changing 'ttcpc' to your desired prefix.
 ?>
 ```

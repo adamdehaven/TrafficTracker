@@ -107,6 +107,6 @@ The top of each page on your site (i.e. `http://www.example.com/index.php`) will
 ```php
 <?php
 include_once('../path/to/class.TrafficTracker.php'); // include class
-$trafficTracker = new TrafficTracker('ttcpc,$_COOKIE); // initialize
+$trafficTracker = new TrafficTracker('ttcpc',$_COOKIE); // initialize
 ?>
 ```

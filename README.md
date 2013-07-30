@@ -79,12 +79,12 @@ Next, initialize the class with arguments:
 ```php
 <?php 
 $trafficTracker = new TrafficTracker(
-	$dbHost, 
-	$dbUsername, 
-	$dbPassword, 
-	$dbDatabase, 
-	$trackPrefix, 
-	$deleteRollingDays
+	$dbHost, // Your Database Host
+	$dbUsername, // Your Database Username
+	$dbPassword, // Your Database Password
+	$dbDatabase, // Your Database Name
+	$trackPrefix, // Preferred prefix for URL parameters and browser cookies
+	$deleteRollingDays // Delete database records older than {$deleteRollingDays} days
 );
 ?>
 ```

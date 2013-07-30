@@ -1,6 +1,6 @@
-TrafficTracker v1.6
+TrafficTracker v1.7
 ==============
-A simple PHP class created and maintained by [@adamdehaven](http://about.adamdehaven.com/) to track and log all of a website's traffic using `PHP` and `MySQL`. The class utilizes cookies set by the typical Google Analytics tracking code initialization. In addition, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.
+A simple PHP class created and maintained by [@adamdehaven](http://about.adamdehaven.com/) to track and log all of a website's traffic using **PHP** and **MySQL**. The class utilizes cookies set by the typical Google Analytics tracking code initialization. In addition, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.
 
 ## HOW IT WORKS
 The class writes to a MySQL database table, saving values for every page visit for the following attributes:
@@ -28,7 +28,7 @@ Key|Description|Value
 
 ## REQUIREMENTS
 * Web Server / Hosting Account running PHP 5+.
-* Website pages capable of running `PHP` server-side code (usually ending in `.php`) as well as JavaScript.
+* Website pages capable of running **PHP** server-side code (usually ending in `.php`) as well as JavaScript.
 * [Google Analytics](https://www.google.com/intl/en_ALL/analytics/index.html) tracking code initialized on all website pages utilizing the asynchronous snippet.
 * If using Google AdWords, you must append each keyword's Destination URL with the [custom URL parameters](#setup-google-adwords-destination-urls-if-using-adwords) outlined below.
 
@@ -71,13 +71,22 @@ private $dateFormat         = 'Y-m-d H:i:s'; // Preferred date format - http://p
 private $cookieExpire       = 30; // Set number of days for AdWords tracking cookies to be valid.
 ```
 
-Simply include the class above the `<head>` of your `PHP` page with:
+Simply include the class above the `<head>` of your **PHP** page with:
 ```php
 <?php include_once('../path/to/class.TrafficTracker.php'); ?>
 ```
 Next, initialize the class with arguments:
 ```php
-<?php $trafficTracker = new TrafficTracker($dbHost, $dbUsername, $dbPassword, $dbDatabase, $trackPrefix, $deleteRollingDays); ?>
+<?php 
+$trafficTracker = new TrafficTracker(
+	$dbHost, 
+	$dbUsername, 
+	$dbPassword, 
+	$dbDatabase, 
+	$trackPrefix, 
+	$deleteRollingDays
+);
+?>
 ```
 The first 4 arguments define the connection to your database. The 4th argument `$trackPrefix` will be used as the prefix for your Google  AdWords destination URL custom parameters, as well as for the cookies set in the visitor's browser. The default value (if unset) is `ttcpc`. The 5th argument `$deleteRollingDays` is an **integer** value that designates the number of rolling days to go back before deleting logged visits. The default value for `$deleteRollingDays` is 30, meaning that any record created greater than 30 days ago from *now* will be deleted.
 
@@ -106,6 +115,18 @@ The top of each page on your site will look similar to this:
 ```php
 <?php
 include_once('../path/to/class.TrafficTracker.php'); // Include class
-$trafficTracker = new TrafficTracker('your_host', 'your_db_username', 'your_db_password', 'your_database', 'ttcpc', 60);
+$trafficTracker = new TrafficTracker(
+	'your_host', 
+	'your_db_username', 
+	'your_db_password', 
+	'your_database', 
+	'ttcpc', 
+	60
+);
 ?>
 ```
+
+## NOTES
+
+1. The unique identifier set for each user by Google Analytics `$identifyUser` is automatically stored in a browser cookie for each visitor which is accessible in **PHP** or **JavaScript**. 
+	* For example, to access the cookie in **PHP**, you would use this format: `$_COOKIE['ttcpc_id']`. Replace `ttcpc` (default) with the value you set for `$trackPrefix`.

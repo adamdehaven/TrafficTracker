@@ -1,6 +1,6 @@
 <?php
 /* ==========================================================
- * class.TrafficTracker.php v1.6
+ * class.TrafficTracker.php v1.7
  * https://github.com/adamdehaven/TrafficTracker
  * 
  * Author: Adam Dehaven ( @adamdehaven )
@@ -106,6 +106,7 @@ class TrafficTracker
 		list($domainHash,$uniqueId,$timestampFirstVisit,$timestampPreviousVisit,$timestampStartCurrentVisit,$numSessionsStarted) = explode('.', $_COOKIE["__utma"]);
 		
 		$this->identifyUser		= $uniqueId; // Get Google Analytics unique user ID.
+		setcookie($this->trackPrefix.'_id', $this->identifyUser, $cookieDie,'/'); // Set Unique ID to $trackPrefix_id cookie.
 		$this->firstVisit		= date($this->dateFormat,$timestampFirstVisit); // Get timestamp of first visit.
 		$this->previousVisit		= date($this->dateFormat,$timestampPreviousVisit); // Get timestamp of previous visit.
 		$this->currentVisitStarted	= date($this->dateFormat,$timestampStartCurrentVisit); // Get timestamp of current visit.

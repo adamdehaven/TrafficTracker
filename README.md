@@ -130,3 +130,14 @@ $trafficTracker = new TrafficTracker(
 
 1. The unique identifier set for each user by Google Analytics `$identifyUser` is automatically stored in a browser cookie for each visitor which is accessible in **PHP** or **JavaScript**. 
 	* For example, to access the cookie in **PHP**, you would use this format: `$_COOKIE['ttcpc_id']`. Replace `ttcpc` (default) with the value you set for `$trackPrefix`.
+
+## Author
+
+**Adam Dehaven**
+* [http://about.adamdehaven.com](http://about.adamdehaven.com)
+* [http://twitter.com/adamdehaven](http://twitter.com/adamdehaven)
+* [http://github.com/adamdehaven](http://github.com/adamdehaven)
+
+## Copyright &amp; License
+
+Copyright &copy; 2013 Adam Dehaven under [the MIT License](https://github.com/adamdehaven/TrafficTracker/blob/master/LICENSE)

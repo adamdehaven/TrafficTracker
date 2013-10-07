@@ -141,6 +141,6 @@ $trafficTracker = new TrafficTracker(
 * [http://github.com/adamdehaven](http://github.com/adamdehaven)
 * [http://dribbble.com/adamdehaven](http://dribbble.com/adamdehaven)
 
-## COPYRIGHT &amp; LICENSE
+## COPYRIGHT &amp; LICENSE 
 
 Copyright &copy; 2013 Adam Dehaven under [the MIT License](https://github.com/adamdehaven/TrafficTracker/blob/master/LICENSE)

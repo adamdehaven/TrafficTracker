@@ -1,5 +1,10 @@
 TrafficTracker v1.7
 ==============
+[![GitHub release](https://img.shields.io/github/release/adamdehaven/TrafficTracker.svg?maxAge=3600)](https://github.com/adamdehaven/TrafficTracker/archive/master.zip) 
+[![GitHub commits](https://img.shields.io/github/commits-since/adamdehaven/TrafficTracker/v1.7.svg?maxAge=3600)](https://github.com/adamdehaven/TrafficTracker/commits/master) 
+[![GitHub issues](https://img.shields.io/github/issues/adamdehaven/TrafficTracker.svg?maxAge=3600)](https://github.com/adamdehaven/TrafficTracker/issues) 
+[![license](https://img.shields.io/github/license/adamdehaven/TrafficTracker.svg?maxAge=3600)](https://raw.githubusercontent.com/adamdehaven/TrafficTracker/master/LICENSE)
+
 A simple, elegant PHP class to track a website's traffic and then log to a database by parsing cookies and custom URL parameters. Created and maintained by [@adamdehaven](#author). 
 
 The class utilizes cookies set by the typical Google Analytics tracking code initialization. In addition, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.

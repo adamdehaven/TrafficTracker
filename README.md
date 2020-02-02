@@ -5,7 +5,7 @@ TrafficTracker v1.7
 [![GitHub issues](https://img.shields.io/github/issues/adamdehaven/TrafficTracker.svg?maxAge=3600)](https://github.com/adamdehaven/TrafficTracker/issues) 
 [![license](https://img.shields.io/github/license/adamdehaven/TrafficTracker.svg?maxAge=3600)](https://raw.githubusercontent.com/adamdehaven/TrafficTracker/master/LICENSE)
 
-A simple, elegant PHP class to track a website's traffic and then log to a database by parsing cookies and custom URL parameters. Created and maintained by [@adamdehaven](#author). 
+A simple, elegant PHP class to track a website's traffic and then log to a database by parsing cookies and custom URL parameters.
 
 The class utilizes cookies set by the typical Google Analytics tracking code initialization. In addition, if you deploy Google AdWords PPC campaigns to drive traffic to your website, the class will (along with custom URL parameters added to your destination URLs) track the hits from your AdWords campaigns.
 
@@ -41,7 +41,7 @@ KEY|DESCRIPTION|VALUE
 
 ## SETUP
 Create a new table on your database called `trafficTracker` using the SQL statement below:
-```php
+``` php
 CREATE TABLE IF NOT EXISTS `trafficTracker` (
   `id` int(10) NOT NULL auto_increment,
   `identifyUser` varchar(65) character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `trafficTracker` (
 ```
 
 Open the `class.TrafficTracker.php` file and edit the top section variables shown here:
-```php
+``` php
 /* -------------------------------------------------------------------------
 ------------------------------- SET DEFAULTS -------------------------------
 --------------------------------------------------------------------------*/
@@ -79,7 +79,7 @@ private $cookieExpire       = 30; // Set number of days for AdWords tracking coo
 ```
 
 Simply include the class above the `<head>` of your **PHP** page with:
-```php
+``` php
 <?php include_once('../path/to/class.TrafficTracker.php'); ?>
 ```
 Next, initialize the class with arguments:
@@ -119,7 +119,7 @@ http://www.example.com/index.php?view=3&ttcpc=true&ttcpc_kw={keyword}&ttcpc_pos=
 2. Initialize the class with your database connection details; optionally changing 'ttcpc' to your desired prefix, and changing the default rolling 30 days delete to 60 days instead.
 
 The top of each page on your site will look similar to this:
-```php
+``` php
 <?php
 include_once('../path/to/class.TrafficTracker.php'); // Include class
 $trafficTracker = new TrafficTracker(
@@ -141,10 +141,9 @@ $trafficTracker = new TrafficTracker(
 ## AUTHOR
 
 **Adam Dehaven**
-* [http://adamdehaven.com](http://adamdehaven.com)
-* [http://twitter.com/adamdehaven](http://twitter.com/adamdehaven)
-* [http://github.com/adamdehaven](http://github.com/adamdehaven)
-* [http://dribbble.com/adamdehaven](http://dribbble.com/adamdehaven)
+* [https://adamdehaven.com](https://adamdehaven.com)
+* [https://twitter.com/adamdehaven](http://twitter.com/adamdehaven)
+* [https://github.com/adamdehaven](http://github.com/adamdehaven)
 
 ## COPYRIGHT &amp; LICENSE 
 
